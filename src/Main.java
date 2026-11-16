@@ -55,7 +55,6 @@ public class Main {
 
         int aluno = buscarAlunoPorMatricula(matricula);
 
-        // Realiza o cadastro normal
         if (aluno != -1) {
             System.out.println("\nJá existe um aluno com essa matricula, deseja atualizar a matricula e o nome do aluno? (sim/nao): ");
             String desejaAtualizar = scanner.next();
@@ -75,7 +74,6 @@ public class Main {
             return;
         }
 
-        // REALIZA O CADASTRO NORMAL
         matriculas[totalAlunos] = matricula;
         scanner.nextLine();
 
