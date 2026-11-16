@@ -48,27 +48,46 @@ public class Main {
         }
 
         System.out.print("Digite a matrícula: ");
-        matriculas[totalAlunos] = scanner.nextInt();
+        int matricula = scanner.nextInt();
+
+        int aluno = buscarAlunoPorMatricula(matricula);
+
+        // Realiza o cadastro normal
+        if (aluno != -1) {
+            System.out.println("\nJá existe um aluno com essa matricula, deseja atualizar a matricula e o nome do aluno? (sim/nao): ");
+            String desejaAtualizar = scanner.next();
+
+            if (desejaAtualizar.equalsIgnoreCase("sim")) {
+                System.out.print("Digite a matrícula: ");
+                matriculas[totalAlunos] = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Digite o nome: ");
+                nomes[totalAlunos] = scanner.nextLine();
+
+                System.out.println("\nAluno atualizado.");
+                return;
+            }
+            System.out.println("\nOperação finalizada.");
+            return;
+        }
+
+        // REALIZA O CADASTRO NORMAL
+        matriculas[totalAlunos] = matricula;
         scanner.nextLine();
 
         System.out.print("Digite o nome: ");
         nomes[totalAlunos] = scanner.nextLine();
 
         totalAlunos++;
-        System.out.println("Aluno cadastrado.");
+        System.out.println("\nAluno cadastrado.");
     }
 
     public static int procurarAluno() {
         System.out.print("Digite a matrícula: ");
         int matricula = scanner.nextInt();
 
-        for (int i = 0; i < totalAlunos; i++) {
-            if (matriculas[i] == matricula) {
-                return i;
-            }
-        }
-
-        return -1;
+        return buscarAlunoPorMatricula(matricula);
     }
 
     public static void cadastrarNotas() {
@@ -102,8 +121,7 @@ public class Main {
     /**
      * Valida o total de alunos cadastrados
      *
-     * @return retorna true se já tiver chegado no limite
-     *
+     * @return  retorna true se já tiver chegado no limite
      * @author  Marcos Conde
      */
     public static boolean validarTotalDeAlunosCadastrados() {
@@ -112,5 +130,21 @@ public class Main {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Busca o aluno pela matricula
+     *
+     * @param   matricula
+     * @return  Retorna o indice do aluno se encontrar
+     * @author  Marcos Conde
+     */
+    public static int buscarAlunoPorMatricula(int matricula) {
+        for (int i = 0; i < totalAlunos; i++) {
+            if (matriculas[i] == matricula) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
