@@ -3,23 +3,94 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws Exception {
+    static int[] matriculas = new int[10];
+    static String[] nomes = new String[10];
+    static double[] notas1 = new double[10];
+    static double[] notas2 = new double[10];
+    static double[] notas3 = new double[10];
+    static double[] frequencias = new double[10];
+    static int totalAlunos = 0;
+
+    public static void main(String[] args) {
         int opcao = 0;
 
-        while (opcao != 7) {
+        while (opcao != 4) {
             menu();
-
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
+
+            if (opcao == 1) {
+                cadastrarAluno();
+            } else if (opcao == 2) {
+                cadastrarNotas();
+            } else if (opcao == 3) {
+                cadastrarFrequencia();
+            } else if (opcao == 4) {
+                System.out.println("Sistema encerrado.");
+            } else {
+                System.out.println("Opção inválida.");
+            }
         }
     }
 
     public static void menu() {
-        System.out.println("Menu:");
-        System.out.println("1. Cadastrar Aluno        4. Listar Alunos");
-        System.out.println("2. Cadastrar Notas        5. Consultar Notas");
-        System.out.println("3. Cadastrar Frequência   6. Consultar Frequência");
-        System.out.println("7. Sair");
+        System.out.println("\n1. Cadastrar Aluno");
+        System.out.println("2. Cadastrar Notas");
+        System.out.println("3. Cadastrar Frequência");
+        System.out.println("4. Sair");
+    }
+
+    public static void cadastrarAluno() {
+        System.out.print("Digite a matrícula: ");
+        matriculas[totalAlunos] = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Digite o nome: ");
+        nomes[totalAlunos] = scanner.nextLine();
+
+        totalAlunos++;
+        System.out.println("Aluno cadastrado.");
+    }
+
+    public static int procurarAluno() {
+        System.out.print("Digite a matrícula: ");
+        int matricula = scanner.nextInt();
+
+        for (int i = 0; i < totalAlunos; i++) {
+            if (matriculas[i] == matricula) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public static void cadastrarNotas() {
+        int aluno = procurarAluno();
+
+        if (aluno != -1) {
+            System.out.print("Digite a primeira nota: ");
+            notas1[aluno] = scanner.nextDouble();
+            System.out.print("Digite a segunda nota: ");
+            notas2[aluno] = scanner.nextDouble();
+            System.out.print("Digite a terceira nota: ");
+            notas3[aluno] = scanner.nextDouble();
+            System.out.println("Notas cadastradas.");
+        } else {
+            System.out.println("Aluno não encontrado.");
+        }
+    }
+
+    public static void cadastrarFrequencia() {
+        int aluno = procurarAluno();
+
+        if (aluno != -1) {
+            System.out.print("Digite a frequência em porcentagem: ");
+            frequencias[aluno] = scanner.nextDouble();
+            System.out.println("Frequência cadastrada.");
+        } else {
+            System.out.println("Aluno não encontrado.");
+        }
     }
 }
