@@ -156,6 +156,7 @@ public class Main {
      */
     public static void consultarBoletim() {
         int mediaAprovado = 6;
+        int frequenciaMinima = 75;
 
         System.out.println("\n----- BOLETIM ACADEMICO -----");
 
@@ -163,12 +164,20 @@ public class Main {
             double media = (notas1[i] + notas2[i] + notas3[i]) / 3;
             String mediaFormatada = String.format("%.2f", media);
 
-            String situacao = (media >= mediaAprovado) ? "APROVADO" : "REPROVADO";
+            double frequencia = frequencias[i];
+
+            String situacao = "REPROVADO";
+            if (
+                media >= mediaAprovado &&
+                frequencia > frequenciaMinima
+            ) {
+                situacao = "APROVADO";
+            }
 
             System.out.println("\nMATRICULA: " + matriculas[i]);
             System.out.println("ALUNO: " + nomes[i]);
             System.out.println("MÉDIA: " + mediaFormatada);
-            System.out.println("FREQUÊNCIA: " + frequencias[i]);
+            System.out.println("FREQUÊNCIA: " + frequencia + "%");
             System.out.println("SITUAÇÃO: " + situacao);
         }
     }
