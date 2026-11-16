@@ -42,6 +42,11 @@ public class Main {
     }
 
     public static void cadastrarAluno() {
+        if (validarTotalDeAlunosCadastrados()) {
+            System.out.println("Limite de cadastro de alunos atingido");
+            return;
+        }
+
         System.out.print("Digite a matrícula: ");
         matriculas[totalAlunos] = scanner.nextInt();
         scanner.nextLine();
@@ -92,5 +97,20 @@ public class Main {
         } else {
             System.out.println("Aluno não encontrado.");
         }
+    }
+
+    /**
+     * Valida o total de alunos cadastrados
+     *
+     * @return retorna true se já tiver chegado no limite
+     *
+     * @author  Marcos Conde
+     */
+    public static boolean validarTotalDeAlunosCadastrados() {
+        if (totalAlunos == 10) {
+            System.out.println(matriculas.length);
+            return true;
+        }
+        return false;
     }
 }
