@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         int opcao = 0;
 
-        while (opcao != 4) {
+        while (opcao != 5) {
             menu();
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -27,6 +27,8 @@ public class Main {
             } else if (opcao == 3) {
                 cadastrarFrequencia();
             } else if (opcao == 4) {
+                consultarBoletim();
+            } else if (opcao == 5) {
                 System.out.println("Sistema encerrado.");
             } else {
                 System.out.println("Opção inválida.");
@@ -38,7 +40,8 @@ public class Main {
         System.out.println("\n1. Cadastrar Aluno");
         System.out.println("2. Cadastrar Notas");
         System.out.println("3. Cadastrar Frequência");
-        System.out.println("4. Sair");
+        System.out.println("4. Consultar boletim");
+        System.out.println("5. Sair");
     }
 
     public static void cadastrarAluno() {
@@ -100,9 +103,9 @@ public class Main {
             notas2[aluno] = scanner.nextDouble();
             System.out.print("Digite a terceira nota: ");
             notas3[aluno] = scanner.nextDouble();
-            System.out.println("Notas cadastradas.");
+            System.out.println("\nNotas cadastradas.");
         } else {
-            System.out.println("Aluno não encontrado.");
+            System.out.println("\nAluno não encontrado.");
         }
     }
 
@@ -112,9 +115,9 @@ public class Main {
         if (aluno != -1) {
             System.out.print("Digite a frequência em porcentagem: ");
             frequencias[aluno] = scanner.nextDouble();
-            System.out.println("Frequência cadastrada.");
+            System.out.println("\nFrequência cadastrada.");
         } else {
-            System.out.println("Aluno não encontrado.");
+            System.out.println("\nAluno não encontrado.");
         }
     }
 
@@ -146,5 +149,29 @@ public class Main {
             }
         }
         return -1;
+    }
+
+    /**
+     * Consultar boletins
+     *
+     * @author  Marcos Conde
+     */
+    public static void consultarBoletim() {
+        int mediaAprovado = 6;
+
+        System.out.println("\n----- BOLETIM ACADEMICO -----");
+
+        for (int i=0; i<totalAlunos; i++) {
+            double media = (notas1[i] + notas2[i] + notas3[i]) / 3;
+            String mediaFormatada = String.format("%.2f", media);
+
+            String situacao = (media >= mediaAprovado) ? "APROVADO" : "REPROVADO";
+
+            System.out.println("\nMATRICULA: " + matriculas[i]);
+            System.out.println("ALUNO: " + nomes[i]);
+            System.out.println("MÉDIA: " + mediaFormatada);
+            System.out.println("FREQUÊNCIA: " + frequencias[i]);
+            System.out.println("SITUAÇÃO: " + situacao);
+        }
     }
 }
