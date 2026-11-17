@@ -132,14 +132,32 @@ public class Main {
 
 	public static void cadastrarNotas() {
 		int aluno = procurarAluno();
+        double nota1, nota2, nota3 = 0.0;
+        boolean notasInvalidas = false;
 
 		if (aluno != -1) {
-			System.out.print("Digite a primeira nota: ");
-			notas1[aluno] = scanner.nextDouble();
-			System.out.print("Digite a segunda nota: ");
-			notas2[aluno] = scanner.nextDouble();
-			System.out.print("Digite a terceira nota: ");
-			notas3[aluno] = scanner.nextDouble();
+            // [ALTERAÇÃO - Marcos Conde] Adicionando validação de notas inválidas
+            do {
+                System.out.print("\nDigite a primeira nota: ");
+                nota1 = scanner.nextDouble();
+
+                System.out.print("Digite a segunda nota: ");
+                nota2 = scanner.nextDouble();
+
+                System.out.print("Digite a terceira nota: ");
+                nota3 =scanner.nextDouble();
+
+                notasInvalidas = validarNotasInformada(nota1, nota2, nota3);
+                if (notasInvalidas) {
+                    System.out.println("\n Notas inválidas. A nota deve está entre 0 e 10, informe novamente!");
+                }
+
+            } while (notasInvalidas == true);
+
+			notas1[aluno] = nota1;
+			notas2[aluno] = nota2;
+			notas3[aluno] = nota3;
+
 			System.out.println("\nNotas cadastradas.");
 		} else {
 			System.out.println("\nAluno não encontrado.");
@@ -223,16 +241,11 @@ public class Main {
 			System.out.println("MÉDIA: " + mediaFormatada);
 			System.out.println("FREQUÊNCIA: " + frequencia + "%");
 			System.out.println("SITUAÇÃO: " + situacao);
-
-			// [ALTERAÇÃO - Jade Vila Flor] Condicional simples (if) para alerta de baixa frequência
-			if (frequencia < frequenciaMinima) {
-							System.out.print(" [ALERTA: Frequência abaixo de 75%]");
-			}
 			System.out.println();
-
-
 		}
 	}
+
+
 	/**
 	 * Listar todos os alunos cadastrados reutilizando o boletim
 	 *
@@ -250,16 +263,41 @@ public class Main {
 		System.out.println("===================================================\n");
 	}
 
-    public static void relatorioGeral(){
+    public static void relatorioGeral() {
         double mediaGeral = 0;
-        for(int i=0; i < totalAlunos; i++){
-            mediaGeral = mediaGeral + (notas1[i] + notas2[i] + notas3[i]);
-    }
-    mediaGeral = mediaGeral / (totalAlunos * 3);
-    String mediaFormatada = String.format("%.2f", mediaGeral);
-    System.out.println("\nA media  geral da turma é " + mediaFormatada);
-    System.out.println("Total de aprovados: " + totalAprovado);
-    System.out.println("Total de reprovados: " + totalReprovado);
-}
 
+        for(int i=0; i < totalAlunos; i++) {
+            mediaGeral = mediaGeral + (notas1[i] + notas2[i] + notas3[i]);
+        }
+
+        mediaGeral = mediaGeral / (totalAlunos * 3);
+        String mediaFormatada = String.format("%.2f", mediaGeral);
+        System.out.println("\nA media  geral da turma é " + mediaFormatada);
+        System.out.println("Total de aprovados: " + totalAprovado);
+        System.out.println("Total de reprovados: " + totalReprovado);
+    }
+
+    /**
+     * Valida as notas informadas
+     *
+     * @param nota1
+     * @param nota2
+     * @param nota3
+     * 
+     * @return  Retorna true se houver nota inválida
+     * @author  Marcos Conde
+     */
+    public static boolean validarNotasInformada(double nota1, double nota2, double nota3) {
+        boolean erro = false;
+
+        if (nota1 < 0 || nota1 > 10) {
+            erro = true;
+        } else if (nota2 < 0 || nota2 > 10) {
+            erro = true;
+        } else if (nota3 < 0 || nota3 > 10) {
+            erro = true;
+        }
+
+        return erro;
+    }
 }
