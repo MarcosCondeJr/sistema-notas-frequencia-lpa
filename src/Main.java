@@ -351,7 +351,7 @@ public class Main {
     }
 
     /**
-     * Exclui um determinado aluno, e seus dados
+     * Exclui um determinado aluno e seus dados
      *
      * @author  Marcos Conde
      */
