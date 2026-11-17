@@ -8,7 +8,7 @@ public class Main {
     static double[] notas1;
     static double[] notas2;
     static double[] notas3;
-    static double[] frequencias;;
+    static double[] frequencias;
     static int totalAlunos = 0;
     static int totalAprovado = 0;
     static int totalReprovado = 0;
@@ -37,11 +37,9 @@ public class Main {
 		notas3 = new double[capacidade];
 		frequencias = new double[capacidade];
 
-
         int opcao = 0;
 
-		// [ALTERAÇÃO - Jade Vila Flor] Condição atualizada para 7 por conta da nova opção no menu
-		while (opcao != 7) {
+		while (opcao != 8) {
 			menu();
 			System.out.print("Escolha uma opção: ");
 			opcao = scanner.nextInt();
@@ -60,6 +58,8 @@ public class Main {
 			} else if (opcao == 6) {
 				relatorioGeral();
 			} else if (opcao == 7) {
+				excluirAluno();
+			} else if (opcao == 8) {
 				System.out.println("================= Sistema encerrado =================");
 			} else {
 				System.out.println("Opção inválida.");
@@ -68,7 +68,6 @@ public class Main {
     }
 
     public static void menu() {
-
         System.out.println("\n====== SISTEMA DE NOTAS E FREQÊNCIA ACADÊMICA =====");
         System.out.println("");
         System.out.println("1. Cadastrar aluno");
@@ -77,7 +76,8 @@ public class Main {
         System.out.println("4. Consultar boletim");
         System.out.println("5. Listar alunos cadastrados");
         System.out.println("6. Relatório geral  da turma");
-        System.out.println("7. Sair");
+        System.out.println("7. Excluir aluno");
+        System.out.println("8. Sair");
         System.out.println();
         System.out.println("===================================================");
     }
@@ -87,6 +87,8 @@ public class Main {
 			System.out.println("Limite do cadastro de alunos atingido");
 			return;
 		}
+
+        System.out.println("\n================ CADASTRAR ALUNO ================");
 
 		System.out.print("\nDigite a matrícula: ");
 		int matricula = scanner.nextInt();
@@ -131,6 +133,8 @@ public class Main {
 	}
 
 	public static void cadastrarNotas() {
+        System.out.println("\n================ CADASTRAR NOTAS ================");
+
 		int aluno = procurarAluno();
         double nota1, nota2, nota3 = 0.0;
         boolean notasInvalidas = false;
@@ -165,6 +169,8 @@ public class Main {
 	}
 
 	public static void cadastrarFrequencia() {
+        System.out.println("\n================ CADASTRAR FREQUÊNCIA ================");
+
 		int aluno = procurarAluno();
         boolean frequenciaInvalida = false;
         double frequencia = 0;
@@ -342,5 +348,39 @@ public class Main {
         }
 
         return erro;
+    }
+
+    /**
+     * Exclui um determinado aluno, e seus dados
+     *
+     * @author  Marcos Conde
+     */
+    public static void excluirAluno() {
+        System.out.println("\n================ EXCLUIR ALUNO ================");
+
+        int aluno = procurarAluno();
+
+        if (aluno == -1) {
+            System.out.println("\nAluno não encontrado.");
+            return;
+        }
+
+        String nomeAluno = "";
+
+        for (int i = 0, j = 0; i < totalAlunos; i++) {
+            if (i == aluno) {
+                nomeAluno = nomes[i];
+                continue;
+            }
+            matriculas[j] = matriculas[i];
+            nomes[j] = nomes[i];
+            notas1[j] = notas1[i];
+            notas2[j] = notas2[i];
+            notas3[j] = notas3[i];
+            frequencias[j] = frequencias[i];
+            j++;
+        }
+        totalAlunos--;
+        System.out.println("\nAluno " + nomeAluno + " excluido com sucesso.");
     }
 }
