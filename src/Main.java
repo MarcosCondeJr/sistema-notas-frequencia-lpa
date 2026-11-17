@@ -21,7 +21,7 @@ public class Main {
 		 * 
 		 */
 		do {
-			System.out.print("Informe a capacidade máxima de alunos da turma: ");
+			System.out.print("\nInforme a capacidade máxima de alunos da turma: ");
 			capacidade = scanner.nextInt();
 
 			if (capacidade <= 0) {
@@ -60,7 +60,7 @@ public class Main {
 			} else if (opcao == 6) {
 				relatorioGeral();
 			} else if (opcao == 7) {
-				System.out.println("Sistema encerrado.");
+				System.out.println("================= Sistema encerrado =================");
 			} else {
 				System.out.println("Opção inválida.");
 			}
@@ -69,7 +69,7 @@ public class Main {
 
     public static void menu() {
 
-        System.out.println("\n----- SISTEMA DE NOTAS E FREQÊNCIA ACADÊMICA -----");
+        System.out.println("\n====== SISTEMA DE NOTAS E FREQÊNCIA ACADÊMICA =====");
         System.out.println("");
         System.out.println("1. Cadastrar aluno");
         System.out.println("2. Cadastrar notas");
@@ -79,16 +79,16 @@ public class Main {
         System.out.println("6. Relatório geral  da turma");
         System.out.println("7. Sair");
         System.out.println();
-        System.out.println("--------------------------------------------------");
+        System.out.println("===================================================");
     }
 
 	public static void cadastrarAluno() {
 		if (validarTotalDeAlunosCadastrados()) {
-			System.out.println("Limite de cadastro de alunos atingido");
+			System.out.println("Limite do cadastro de alunos atingido");
 			return;
 		}
 
-		System.out.print("Digite a matrícula: ");
+		System.out.print("\nDigite a matrícula: ");
 		int matricula = scanner.nextInt();
 
 		int aluno = buscarAlunoPorMatricula(matricula);
@@ -123,7 +123,7 @@ public class Main {
 	}
 
 	public static int procurarAluno() {
-		System.out.print("Digite a matrícula: ");
+		System.out.print("\nDigite a matrícula: ");
 		int matricula = scanner.nextInt();
 
 		return buscarAlunoPorMatricula(matricula);
@@ -148,9 +148,9 @@ public class Main {
 	public static void cadastrarFrequencia() {
 		int aluno = procurarAluno();
 
-        System.out.println("\n---------------- BOLETIM ACADEMICO ---------------");
+        System.out.println("\n================= BOLETIM ACADEMICO =================");
 		if (aluno != -1) {
-			System.out.print("Digite a frequência em porcentagem: ");
+			System.out.print("\nDigite a frequência em porcentagem: ");
 			frequencias[aluno] = scanner.nextDouble();
 			System.out.println("\nFrequência cadastrada.");
 		} else {
@@ -238,15 +238,15 @@ public class Main {
 	 * @author Jade Vila Flor
 	 */
 	public static void listarAlunos() {
-		System.out.println("\n=== LISTA DE ALUNOS CADASTRADOS =========================================================");
+		System.out.println("\n============ LISTA DE ALUNOS CADASTRADOS ============");
 
 		if (totalAlunos == 0) {
-			System.out.println("Nenhum aluno cadastrado no sistema.");
+			System.out.println("\nNenhum aluno cadastrado no sistema.");
 		} else {
-			System.out.println("Total de alunos cadastrados: " + totalAlunos + " de " + capacidade);
+			System.out.println("\nTotal de alunos cadastrados: " + totalAlunos + " de " + capacidade);
 			consultarBoletim();
 		}
-		System.out.println("===================================\n");
+		System.out.println("===================================================\n");
 	}
 
     public static void relatorioGeral(){
@@ -256,7 +256,7 @@ public class Main {
     }
     mediaGeral = mediaGeral / (totalAlunos * 3);
     String mediaFormatada = String.format("%.2f", mediaGeral);
-    System.out.println("A media  geral da turma é " + mediaFormatada);
+    System.out.println("\nA media  geral da turma é " + mediaFormatada);
     System.out.println("Total de aprovados: " + totalAprovado);
     System.out.println("Total de reprovados: " + totalReprovado);
 }
