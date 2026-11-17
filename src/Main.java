@@ -10,11 +10,13 @@ public class Main {
     static double[] notas3 = new double[10];
     static double[] frequencias = new double[10];
     static int totalAlunos = 0;
+    static int totalAprovado = 0;
+    static int totalReprovado = 0;
 
     public static void main(String[] args) {
         int opcao = 0;
 
-        while (opcao != 5) {
+        while (opcao != 6) {
             menu();
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -29,6 +31,8 @@ public class Main {
             } else if (opcao == 4) {
                 consultarBoletim();
             } else if (opcao == 5) {
+                relatorioGeral();
+            }else if (opcao == 6) {
                 System.out.println("Sistema encerrado.");
             } else {
                 System.out.println("Opção inválida.");
@@ -37,11 +41,17 @@ public class Main {
     }
 
     public static void menu() {
-        System.out.println("\n1. Cadastrar Aluno");
-        System.out.println("2. Cadastrar Notas");
-        System.out.println("3. Cadastrar Frequência");
+
+        System.out.println("\n----- SISTEMA DE NOTAS E FREQÊNCIA ACADÊMICA -----");
+        System.out.println("");
+        System.out.println("1. Cadastrar aluno");
+        System.out.println("2. Cadastrar notas");
+        System.out.println("3. Cadastrar frequência");
         System.out.println("4. Consultar boletim");
-        System.out.println("5. Sair");
+        System.out.println("5. Relatório geral  da turma");
+        System.out.println("6. Sair");
+        System.out.println();
+        System.out.println("--------------------------------------------------");
     }
 
     public static void cadastrarAluno() {
@@ -158,7 +168,7 @@ public class Main {
         int mediaAprovado = 6;
         int frequenciaMinima = 75;
 
-        System.out.println("\n----- BOLETIM ACADEMICO -----");
+        System.out.println("\n---------------- BOLETIM ACADEMICO ---------------");
 
         for (int i=0; i<totalAlunos; i++) {
             double media = (notas1[i] + notas2[i] + notas3[i]) / 3;
@@ -172,6 +182,9 @@ public class Main {
                 frequencia > frequenciaMinima
             ) {
                 situacao = "APROVADO";
+                totalAprovado = totalAprovado + 1;
+            }else{
+                totalReprovado = totalReprovado + 1;
             }
 
             System.out.println("\nMATRICULA: " + matriculas[i]);
@@ -180,5 +193,19 @@ public class Main {
             System.out.println("FREQUÊNCIA: " + frequencia + "%");
             System.out.println("SITUAÇÃO: " + situacao);
         }
+        System.out.println("\n--------------------------------------------------");
     }
+
+    public static void relatorioGeral(){
+        double mediaGeral = 0;
+        for(int i=0; i < totalAlunos; i++){
+            mediaGeral = mediaGeral + (notas1[i] + notas2[i] + notas3[i]);
+    }
+    mediaGeral = mediaGeral / (totalAlunos * 3);
+    String mediaFormatada = String.format("%.2f", mediaGeral);
+    System.out.println("A media  geral da turma é " + mediaFormatada);
+    System.out.println("Total de aprovados: " + totalAprovado);
+    System.out.println("Total de reprovados: " + totalReprovado);
+}
+
 }
