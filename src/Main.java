@@ -166,11 +166,24 @@ public class Main {
 
 	public static void cadastrarFrequencia() {
 		int aluno = procurarAluno();
+        boolean frequenciaInvalida = false;
+        double frequencia = 0;
 
-        System.out.println("\n================ BOLETIM ACADEMICO ================");
 		if (aluno != -1) {
-			System.out.print("\nDigite a frequência em porcentagem: ");
-			frequencias[aluno] = scanner.nextDouble();
+            // [ALTERAÇÃO - Marcos Conde] Adicionando validação de frequência inválida
+            do {
+                frequenciaInvalida = false;
+
+                System.out.print("\nDigite a frequência em porcentagem: ");
+                frequencia = scanner.nextDouble();
+
+                if (frequencia < 0 || frequencia > 100) {
+                    System.out.println("\nFrequência inválida. Informe um valor entre 0 e 100");
+                    frequenciaInvalida = true;
+                }
+            } while (frequenciaInvalida == true);
+
+			frequencias[aluno] = frequencia;
 			System.out.println("\nFrequência cadastrada.");
 		} else {
 			System.out.println("\nAluno não encontrado.");
@@ -283,7 +296,7 @@ public class Main {
      * @param nota1
      * @param nota2
      * @param nota3
-     * 
+     *
      * @return  Retorna true se houver nota inválida
      * @author  Marcos Conde
      */
