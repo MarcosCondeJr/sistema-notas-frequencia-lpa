@@ -48,11 +48,7 @@ public class Main {
 			if (opcao == 1) {
 				cadastrarAluno();
 			} else if (opcao == 2) {
-				System.out.println("\n================ CADASTRAR NOTAS ================");
-				System.out.print("\nDigite a matrícula: ");
-				int matricula = scanner.nextInt();
-
-				cadastrarNotas(matricula);
+				cadastrarNotas();
 			} else if (opcao == 3) {
 				cadastrarFrequencia();
 			} else if (opcao == 4) {
@@ -136,28 +132,31 @@ public class Main {
 		return buscarAlunoPorMatricula(matricula);
 	}
 
-	public static void cadastrarNotas(int matricula) {
-		int aluno = buscarAlunoPorMatricula(matricula);
-		double nota1, nota2, nota3 = 0.0;
-		boolean notasInvalidas = false;
+	public static void cadastrarNotas() {
+        System.out.println("\n================ CADASTRAR NOTAS ================");
+
+		int aluno = procurarAluno();
+        double nota1, nota2, nota3 = 0.0;
+        boolean notasInvalidas = false;
 
 		if (aluno != -1) {
-			do {
-				System.out.print("\nDigite a primeira nota: ");
-				nota1 = scanner.nextDouble();
+            // [ALTERAÇÃO - Marcos Conde] Adicionando validação de notas inválidas
+            do {
+                System.out.print("\nDigite a primeira nota: ");
+                nota1 = scanner.nextDouble();
 
-				System.out.print("Digite a segunda nota: ");
-				nota2 = scanner.nextDouble();
+                System.out.print("Digite a segunda nota: ");
+                nota2 = scanner.nextDouble();
 
-				System.out.print("Digite a terceira nota: ");
-				nota3 = scanner.nextDouble();
+                System.out.print("Digite a terceira nota: ");
+                nota3 =scanner.nextDouble();
 
-				notasInvalidas = validarNotasInformada(nota1, nota2, nota3);
-				if (notasInvalidas) {
-					System.out.println("\n Notas inválidas. A nota deve está entre 0 e 10, informe novamente!");
-				}
+                notasInvalidas = validarNotasInformada(nota1, nota2, nota3);
+                if (notasInvalidas) {
+                    System.out.println("\n Notas inválidas. A nota deve está entre 0 e 10, informe novamente!");
+                }
 
-			} while (notasInvalidas == true);
+            } while (notasInvalidas == true);
 
 			notas1[aluno] = nota1;
 			notas2[aluno] = nota2;
