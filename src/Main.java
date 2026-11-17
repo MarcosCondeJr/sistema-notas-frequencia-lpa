@@ -148,7 +148,7 @@ public class Main {
 	public static void cadastrarFrequencia() {
 		int aluno = procurarAluno();
 
-        System.out.println("\n================= BOLETIM ACADEMICO =================");
+        System.out.println("\n================ BOLETIM ACADEMICO ================");
 		if (aluno != -1) {
 			System.out.print("\nDigite a frequência em porcentagem: ");
 			frequencias[aluno] = scanner.nextDouble();
@@ -229,7 +229,7 @@ public class Main {
 			}
 			System.out.println();
 
-			System.out.println("SITUAÇÃO: " + situacao);
+			
 		}
 	}
 	/**
