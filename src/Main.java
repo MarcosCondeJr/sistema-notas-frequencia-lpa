@@ -18,7 +18,7 @@ public class Main {
 
         /**
 		 * [ALTERAÇÃO - Jade Vila Flor] Substituição da limitação fixa de 10 alunos
-		 * 
+		 *
 		 */
 		do {
 			System.out.print("\nInforme a capacidade máxima de alunos da turma: ");
@@ -93,6 +93,7 @@ public class Main {
 
 		int aluno = buscarAlunoPorMatricula(matricula);
 
+        // [ALTERAÇÃO - Marcos Conde] Adicionando fluxo de atualização de aluno já cadastrado
 		if (aluno != -1) {
 			System.out.println("\nJá existe um aluno com essa matricula, deseja atualizar a matricula e o nome do aluno? (sim/nao): ");
 			String desejaAtualizar = scanner.next();
@@ -222,18 +223,18 @@ public class Main {
 			System.out.println("MÉDIA: " + mediaFormatada);
 			System.out.println("FREQUÊNCIA: " + frequencia + "%");
 			System.out.println("SITUAÇÃO: " + situacao);
-			
+
 			// [ALTERAÇÃO - Jade Vila Flor] Condicional simples (if) para alerta de baixa frequência
 			if (frequencia < frequenciaMinima) {
 							System.out.print(" [ALERTA: Frequência abaixo de 75%]");
 			}
 			System.out.println();
 
-			
+
 		}
 	}
 	/**
-	 * Listar todos os alunos cadastrados reutilizando o boletim 
+	 * Listar todos os alunos cadastrados reutilizando o boletim
 	 *
 	 * @author Jade Vila Flor
 	 */
