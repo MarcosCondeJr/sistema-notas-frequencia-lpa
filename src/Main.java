@@ -222,17 +222,41 @@ public class Main {
 	}
 
 	/**
-	 * Consultar boletins
+	 * Consulta o boletim de um aluno ou de todos.
 	 *
 	 * @author Marcos Conde
 	 */
 	public static void consultarBoletim() {
 		int mediaAprovado = 6;
 		int frequenciaMinima = 75;
+        boolean listarTodos = true;
+        int aluno = -1;
 
-		System.out.println("\n===== BOLETIM ACADEMICO =====");
+		System.out.println("\n================ BOLETIM ACADEMICO ================");
+
+        if (totalAlunos == 0) {
+            System.out.println("\nNenhum aluno cadastrado no sistema.");
+            return;
+        }
+
+        System.out.print("\nDeseja filtrar por matricula? (1 - Sim/2 - Não): ");
+
+        if (scanner.nextInt() == 1) {
+            listarTodos = false;
+            aluno = procurarAluno();
+        }
 
 		for (int i = 0; i < totalAlunos; i++) {
+            if (aluno != -1 && i != aluno) {
+                continue;
+            }
+
+            if (aluno == -1 && !listarTodos) {
+                System.out.println("\nAluno não encontrado.");
+                System.out.println("\nOperação finalizada.");
+                return;
+            }
+
 			double media = (notas1[i] + notas2[i] + notas3[i]) / 3;
 			String mediaFormatada = String.format("%.2f", media);
 
@@ -254,9 +278,8 @@ public class Main {
 			System.out.println("MÉDIA: " + mediaFormatada);
 			System.out.println("FREQUÊNCIA: " + frequencia + "%");
 			System.out.println("SITUAÇÃO: " + situacao);
-			System.out.println();
 		}
-        // System.out.println("\n=============================");
+        System.out.println("\n===================================================");
 	}
 
 	/**
