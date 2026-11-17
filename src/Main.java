@@ -95,16 +95,16 @@ public class Main {
 
         // [ALTERAÇÃO - Marcos Conde] Adicionando fluxo de atualização de aluno já cadastrado
 		if (aluno != -1) {
-			System.out.println("\nJá existe um aluno com essa matricula, deseja atualizar a matricula e o nome do aluno? (sim/nao): ");
-			String desejaAtualizar = scanner.next();
+			System.out.print("\nJá existe um aluno com essa matricula, deseja atualizar a matricula e o nome do aluno? (1 - Sim/ 2 - Não): ");
+			int desejaAtualizar = scanner.nextInt();
 
-			if (desejaAtualizar.equalsIgnoreCase("sim")) {
+			if (desejaAtualizar == 1) {
 				System.out.print("Digite a matrícula: ");
-				matriculas[totalAlunos] = scanner.nextInt();
+				matriculas[aluno] = scanner.nextInt();
 				scanner.nextLine();
 
 				System.out.print("Digite o nome: ");
-				nomes[totalAlunos] = scanner.nextLine();
+				nomes[aluno] = scanner.nextLine();
 
 				System.out.println("\nAluno atualizado.");
 				return;
