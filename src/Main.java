@@ -230,7 +230,7 @@ public class Main {
 		int mediaAprovado = 6;
 		int frequenciaMinima = 75;
 
-		System.out.println("\n----- BOLETIM ACADEMICO -----");
+		System.out.println("\n===== BOLETIM ACADEMICO =====");
 
 		for (int i = 0; i < totalAlunos; i++) {
 			double media = (notas1[i] + notas2[i] + notas3[i]) / 3;
@@ -256,8 +256,8 @@ public class Main {
 			System.out.println("SITUAÇÃO: " + situacao);
 			System.out.println();
 		}
+        // System.out.println("\n=============================");
 	}
-
 
 	/**
 	 * Listar todos os alunos cadastrados reutilizando o boletim
@@ -271,9 +271,16 @@ public class Main {
 			System.out.println("\nNenhum aluno cadastrado no sistema.");
 		} else {
 			System.out.println("\nTotal de alunos cadastrados: " + totalAlunos + " de " + capacidade);
-			consultarBoletim();
+
+            // [ALTERAÇÃO - Marcos Conde] Estilo da lista de alunos
+            System.out.printf("\n%-15s | %-30s%n", "MATRÍCULA", "NOME");
+            System.out.println("--------------------------------------------------");
+
+            for (int i = 0; i < totalAlunos; i++) {
+                System.out.printf("%-15s | %-30s%n", matriculas[i], nomes[i]);
+            }
 		}
-		System.out.println("===================================================\n");
+		System.out.println("--------------------------------------------------");
 	}
 
     public static void relatorioGeral() {
